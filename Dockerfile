@@ -17,8 +17,8 @@ COPY requirements.txt /requirements.txt
 # Installing Requirements
 RUN cd /
 RUN pip3 install -U -r requirements.txt
-RUN mkdir /LazyDeveloper
-WORKDIR /LazyDeveloper
+RUN mkdir /app
+WORKDIR /app
 COPY start.sh /start.sh
 
 # Running MessageSearchBot
