@@ -5,7 +5,7 @@ logging.config.fileConfig('logging.conf')
 logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
-PORT = os.environ.get('PORT', '8080')
+PORT = 8080
 
 import os
 from config import Config
