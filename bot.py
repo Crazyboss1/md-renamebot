@@ -6,9 +6,11 @@ logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
 import os
-from config import Config
+from config import Config, PORT
 from pyrogram import Client
 from plugins.database import db 
+from aiohttp import web
+from route import web_server
 
 class Bot(Client):
    
@@ -28,8 +30,12 @@ class Bot(Client):
         os.makedirs(Config.DOWNLOAD_LOCATION)
       banned_users = await db.get_banned_users()
       Config.BANNED_USERS = banned_users
-      logging.info(f"{self.me.first_name} is Successfully started")
-   
+      app = web.AppRunner(await web_server())
+      await app.setup()
+      bind_address = "0.0.0.0"       
+      await web.TCPSite(app, bind_address, PORT).start()     
+      print(f"{me.first_name} 𝚂𝚃𝙰𝚁𝚃𝙴𝙳 ⚡️⚡️⚡️")
+
    async def stop(self):
       await super().stop()
       logging.info(f"{self.me.first_name} is stopped...")
