@@ -5,8 +5,10 @@ logging.config.fileConfig('logging.conf')
 logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 
+PORT = os.environ.get('PORT', '8080')
+
 import os
-from config import Config, PORT
+from config import Config
 from pyrogram import Client
 from plugins.database import db 
 from aiohttp import web
